@@ -33,21 +33,21 @@ fig, ax = plt.subplots(figsize=(15, 6))
 plt.scatter(x, y, c=kmeans.labels_)
 ax.set_xlabel(r'Id', fontsize=14)
 ax.set_ylabel(r'y', fontsize=14)
-ax.xaxis.set_major_locator(ticker.MultipleLocator(50))
-ax.xaxis.set_minor_locator(ticker.MultipleLocator(10))
+#ax.xaxis.set_major_locator(ticker.MultipleLocator(50))
+#ax.xaxis.set_minor_locator(ticker.MultipleLocator(10))
 
-ax.yaxis.set_major_locator(ticker.MultipleLocator(50))
-ax.yaxis.set_minor_locator(ticker.MultipleLocator(10))
+#ax.yaxis.set_major_locator(ticker.MultipleLocator(50))
+#ax.yaxis.set_minor_locator(ticker.MultipleLocator(10))
 plt.xticks(fontsize=12)
 plt.yticks(fontsize=12)
 
-ax.grid(which='major',
-        color = 'gray',
-        linewidth = 0.5)
+#ax.grid(which='major',
+#        color = 'gray',
+#        linewidth = 0.5)
 
-ax.minorticks_on()
-ax.grid(which='minor',
-        color = 'gray',
-        linewidth = 0.5)
+#ax.minorticks_on()
+#ax.grid(which='minor',
+#        color = 'gray',
+#        linewidth = 0.5)
 
 plt.show()
