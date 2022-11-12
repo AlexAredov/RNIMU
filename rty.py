@@ -12,6 +12,7 @@ def is_number(str):
 
 x = []
 y = []
+z = []
 
 with open('./titanic.csv') as f:
     reader = csv.reader(f)
@@ -20,14 +21,16 @@ with open('./titanic.csv') as f:
         if is_number(row[1]) and is_number(row[2]):
             x.append(float(row[0]))
             y.append(float(row[9]))
+            z.append(0)
 
 
-data = list(zip(x,y))
-print(data) 
-inertias = []
+data = list(zip(y,z))
+print(data)
 
 kmeans = KMeans(n_clusters=6)
 kmeans.fit(data)
+
+data = list(zip(x,y))
 
 fig, ax = plt.subplots(figsize=(15, 6))
 plt.scatter(x, y, c=kmeans.labels_)
