@@ -19,14 +19,15 @@ with open('./titanic.csv') as f:
     for row in reader:
         #print(row[0])
         if is_number(row[1]) and is_number(row[2]):
-            x.append(float(row[0]))
-            y.append(float(row[9]))
+            x.append(float(row[9]))
+            y.append(float(row[0]))
             z.append(0)
 
 
-data = list(zip(y,z))
-print(data)
+data = list(zip(x,z))
+#print(data)
 
+#K-means
 kmeans = KMeans(n_clusters=6)
 kmeans.fit(data)
 
@@ -34,8 +35,8 @@ data = list(zip(x,y))
 
 fig, ax = plt.subplots(figsize=(15, 6))
 plt.scatter(x, y, c=kmeans.labels_)
-ax.set_xlabel(r'Id', fontsize=14)
-ax.set_ylabel(r'y', fontsize=14)
+ax.set_xlabel(r'val', fontsize=14)
+ax.set_ylabel(r'ID', fontsize=14)
 #ax.xaxis.set_major_locator(ticker.MultipleLocator(50))
 #ax.xaxis.set_minor_locator(ticker.MultipleLocator(10))
 
