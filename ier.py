@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
 import csv
+import numpy as np
 import matplotlib.ticker as ticker
+from sklearn.cluster import AgglomerativeClustering
 
 
 def is_number(str):
@@ -28,31 +29,16 @@ with open('./titanic.csv') as f:
 data = list(zip(x,z))
 #print(data)
 
-#K-means
-kmeans = KMeans(n_clusters=6)
-kmeans.fit(data)
+cluster = AgglomerativeClustering(n_clusters=6, affinity='euclidean', linkage='ward')
+cluster.fit_predict(data)
 
 data = list(zip(x,y))
 
 fig, ax = plt.subplots(figsize=(15, 6))
-plt.scatter(x, y, c=kmeans.labels_)
+plt.scatter(np.array(data)[:,0],np.array(data)[:,1], c=cluster.labels_, cmap='rainbow')
 ax.set_xlabel(r'val', fontsize=14)
 ax.set_ylabel(r'ID', fontsize=14)
-#ax.xaxis.set_major_locator(ticker.MultipleLocator(50))
-#ax.xaxis.set_minor_locator(ticker.MultipleLocator(10))
-
-#ax.yaxis.set_major_locator(ticker.MultipleLocator(50))
-#ax.yaxis.set_minor_locator(ticker.MultipleLocator(10))
 plt.xticks(fontsize=12)
 plt.yticks(fontsize=12)
-
-#ax.grid(which='major',
-#        color = 'gray',
-#        linewidth = 0.5)
-
-#ax.minorticks_on()
-#ax.grid(which='minor',
-#        color = 'gray',
-#        linewidth = 0.5)
 
 plt.show()

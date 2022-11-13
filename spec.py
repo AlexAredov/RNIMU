@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 import csv
+import numpy as np
 import matplotlib.ticker as ticker
-
+from sklearn.cluster import SpectralClustering
+from sklearn.metrics import calinski_harabasz_score
 
 def is_number(str):
     try:
@@ -24,35 +26,24 @@ with open('./titanic.csv') as f:
             y.append(float(row[0]))
             z.append(0)
 
-
 data = list(zip(x,z))
-#print(data)
 
-#K-means
-kmeans = KMeans(n_clusters=6)
-kmeans.fit(data)
+
+model = SpectralClustering(n_clusters=6,gamma=0.01)
+model.fit(data)
+score = calinski_harabasz_score(data,model.labels_)
+#SpectralClustering
 
 data = list(zip(x,y))
 
+pre_y = model.labels_
+
 fig, ax = plt.subplots(figsize=(15, 6))
-plt.scatter(x, y, c=kmeans.labels_)
 ax.set_xlabel(r'val', fontsize=14)
 ax.set_ylabel(r'ID', fontsize=14)
-#ax.xaxis.set_major_locator(ticker.MultipleLocator(50))
-#ax.xaxis.set_minor_locator(ticker.MultipleLocator(10))
-
-#ax.yaxis.set_major_locator(ticker.MultipleLocator(50))
-#ax.yaxis.set_minor_locator(ticker.MultipleLocator(10))
 plt.xticks(fontsize=12)
 plt.yticks(fontsize=12)
 
-#ax.grid(which='major',
-#        color = 'gray',
-#        linewidth = 0.5)
-
-#ax.minorticks_on()
-#ax.grid(which='minor',
-#        color = 'gray',
-#        linewidth = 0.5)
-
+for i in range(6):
+    plt.scatter(np.array(data)[pre_y==i][:,0],np.array(data)[pre_y==i][:,1])
 plt.show()
